@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_orange-blue.min.css" />
+        <link rel="stylesheet" href="css/basic.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    </head>
+    <title>LilPlay</title>
+</head>
+<body>
+    <!-- Accent-colored raised button with ripple -->
+    <div class="mdl-layout__container"style="width:90%; height:90%; margin:5%; ">
+        <div class="mdl-layout mdl-js-layout" style="overflow:hidden;">
+
+            <div class="mdl-cell mdl-cell--4-col">
+                <div id="loggedin" style="display:none;">
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <label style="    padding-top: 15px;"class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="saved">
+                            <input name="saved" id="saved" type="checkbox"  checked class="mdl-icon-toggle__input">
+                            <i id="tt1" class="mdl-icon-toggle__label material-icons">save</i>
+                            <div class="mdl-tooltip" data-mdl-for="tt1">
+                                Save Data
+                            </div>
+                        </label>
+                        <div style="display: flex; justify-content: center;">
+                            <img src="logo.svg" width="220" height="220" align="center">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <form id= "formsync" onsubmit="submitForm" style="width:80%; display:inline!important;">
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <label style="    padding-top: 15px;"class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="save">
+                            <input name="save" id="save" type="checkbox" class="mdl-icon-toggle__input">
+                            <i id="tt1" class="mdl-icon-toggle__label material-icons">save</i>
+                            <div class="mdl-tooltip" data-mdl-for="tt1">
+                                Save Data
+                            </div>
+                        </label>
+                        <label style="    padding-top: 15px;"class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="convert">
+                            <input name="convert" id="convert" type="checkbox"  class="mdl-icon-toggle__input">
+                            <i id="tt2" class="mdl-icon-toggle__label material-icons">audiotrack</i>
+                            <div class="mdl-tooltip" data-mdl-for="tt2">
+                                Convert to Wav
+                            </div>
+                        </label>
+                        <img src="logo.svg" width="60" height="60" align="right">
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-item-full">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input  name="email" required class="mdl-textfield__input" type="email" id="email">
+                                <label class="mdl-textfield__label" for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="flex-item-full">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input  name="password" required class="mdl-textfield__input" type="password" id="password">
+                                <label class="mdl-textfield__label" for="password">Password.</label>
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <input id="path" name="path" required  type="file" webkitdirectory directory multiple style="display:none" />
+                            <button   type= "button" onclick="document.getElementById('path').click();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                Choose Path
+                            </button>
+                        </div>
+                        <div class="flex-item-cross">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input  name="size" class="mdl-textfield__input" type="number" id="size">
+                                <label class="mdl-textfield__label" for="size">Size</label>
+                            </div>
+                        </div>
+                        <div class="flex-item-cross">
+                            <p style="margin-bottom:5px;">GB</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mdl-cell mdl-cell--4-col">
+                <input id="submitForm" type="submit" form="formsync" style="display:none" />
+                <button  id="syncButton" style=" margin-left:25%; width:50%; " class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Sync
+                </button>
+            </div>
+            <br>
+
+            <div class="mdl-cell mdl-cell--4-col">
+                <div   id="p1" class="mdl-progress mdl-js-progress"></div>
+                <p id="advance" style="text-align: center;">
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    require('./index.js')
+    </script>
+</body>
+</html>

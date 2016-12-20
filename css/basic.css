@@ -1,0 +1,37 @@
+body {
+
+  background: #fafafa;
+   overflow: hidden;
+}
+
+
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 300px;
+    height: 240px;
+    align-items: baseline;
+
+    flex-flow: row wrap;
+    justify-content: flex-start ;
+    align-content: flex-start ;
+
+
+}
+
+.flex-item {
+
+    width: 180px;
+}
+.flex-item-cross {
+
+    width: 40px;
+}
+
+.flex-item-full {
+
+    width: 300px;
+    height: 80px;
+
+}
