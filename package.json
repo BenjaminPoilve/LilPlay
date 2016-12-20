@@ -17,7 +17,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-packager": "^8.4.0"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -25,6 +26,7 @@
     "fluent-ffmpeg": "^2.1.0",
     "http": "0.0.0",
     "https": "^1.0.0",
-    "jsonfile": "^2.4.0"
+    "jsonfile": "^2.4.0",
+    "playmusic": "^2.2.0"
   }
 }
