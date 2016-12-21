@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "lilplay",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Dumphone friendly google play music",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -14,8 +14,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "",
+  "license": "",
   "devDependencies": {
     "electron": "^1.4.1",
     "electron-packager": "^8.4.0"
