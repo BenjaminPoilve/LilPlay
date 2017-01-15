@@ -5,19 +5,22 @@ var fs = require('fs');
 var https = require('https');
 var async = require("async");
 var ffmpeg = require('fluent-ffmpeg');
+var remote = require('electron').remote;
+var id3 = require('music-tag');
+
 var dataLoaded=false
-var path=""
+var configPath=remote.getCurrentWindow().path+"/data.json"
+var store=""
 var save=true;
 var convert=false;
 var email=""
 var password=""
-var size=16;
 
+//EVENT LISTENERS
 
-
+//TRIES TO FIND CONFIG FILE
 document.addEventListener("DOMContentLoaded", function(event) {
-    var file = app.getPath(appData)+'/data.json'
-    jsonfile.readFile(file, function(err, obj) {
+    jsonfile.readFile(configPath, function(err, obj) {
         if(!err){
         document.getElementById("formsync").style.display = "none";
         document.getElementById("loggedin").style.display = "flex";
@@ -32,11 +35,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
  });
 
+//DL UPDATE
  document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
      this.MaterialProgress.setProgress(0);
  });
 
-
+ //FORM OVVERIDE
  var form = document.getElementById('formsync');
  if (form.attachEvent) {
      form.attachEvent("submit", processForm);
@@ -44,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      form.addEventListener("submit", processForm);
  }
 
+ //SYNC START
  document.getElementById("syncButton").addEventListener("click", function(event) {
     if(dataLoaded){
         process();
@@ -52,8 +57,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 });
 
+//CONFIG RESET
 document.getElementById("saved").addEventListener("click", function(event) {
-    fs.unlink(app.getPath(appData)+'/data.json',function(err){
+    console.log(store);
+    fs.unlink(configPath,function(err){
        if(err) return console.log(err);
        location.reload();
   });
@@ -87,7 +94,7 @@ function process(){
         }
 
         if(save){
-            var file = app.getPath(appData)+'/data.json'
+            var file = configPath
             var obj = {path: path.path,
                        convert: convert,
                        email: email,
@@ -95,7 +102,7 @@ function process(){
                        path: path,
                        size: size,
                     }
-            jsonfile.writeFile(file, obj, function (err) {
+            jsonfile.writeFile(configPath, obj, function (err) {
                 console.error(err)
             })
         }
@@ -106,7 +113,6 @@ function process(){
             index=0;
             async.eachSeries(data.track, function (track, callback) {
                 name= track.title+"-"+track.artist
-                console.log(name);
                 console.log(track.storeId);
                 if (!fs.existsSync(path+"/"+name+".mp3") && !fs.existsSync(path+"/"+name+".wav")) {
                     var file = fs.createWriteStream("/tmp/"+name+".mp3");
@@ -118,14 +124,27 @@ function process(){
                                 index+=1;
                                 document.getElementById("advance").innerHTML=index+"/"+numSong
                                 document.querySelector('#p1').MaterialProgress.setProgress(100*index/numSong);
-                                if(convert ){
+                                if(convert == true){
                                     convertWav("/tmp/"+name+".mp3",path+"/"+name+".wav",callback);
                                 }else{
-                                    fs.createReadStream("/tmp/"+name+".mp3").pipe(fs.createWriteStream(path+"/"+name+".mp3"));
-                                    fs.unlink("/tmp/"+name+".mp3",function(err){
-                                       if(err) return console.log(err);
-                                       callback();
-                                   });
+                                    var source=fs.createReadStream("/tmp/"+name+".mp3")
+                                    source.pipe(fs.createWriteStream(path+"/"+name+".mp3"));
+                                    source.on('end', function() {
+                                        fs.unlink("/tmp/"+name+".mp3",function(err){
+                                           if(err) return console.log(err);
+                                           id3.write(path+"/"+name+".mp3",  { title: track.title,
+                                                                              artist: track.artist,
+                                                                              album: track.album,
+                                                                              composer: track.composer,
+                                                                            }).then(function(result) {
+                                               console.log(result);
+                                               callback();
+                                           }).fail(function(err) {
+                                               throw err;
+                                           });
+                                       });
+                                    });
+                                    source.on('error', function(err) {  callback();});
                                 }
                             });
                         });
@@ -134,7 +153,7 @@ function process(){
                     index+=1;
                     document.getElementById("advance").innerHTML=index+"/"+numSong
                     document.querySelector('#p1').MaterialProgress.setProgress(100*index/numSong);
-                    if(convert && fs.existsSync(path+"/"+name+".mp3")){
+                    if(convert == true && fs.existsSync(path+"/"+name+".mp3")){
                         convertWav(path+"/"+name+".mp3",path+"/"+name+".wav",callback);
                     }else{
                         callback();

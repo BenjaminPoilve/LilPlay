@@ -27,6 +27,7 @@
     "http": "0.0.0",
     "https": "^1.0.0",
     "jsonfile": "^2.4.0",
+    "music-tag": "0.0.9",
     "playmusic": "^2.2.0"
   }
 }

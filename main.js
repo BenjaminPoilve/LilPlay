@@ -3,18 +3,18 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
-
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 300, height: 495,resizable: false})
+  mainWindow = new BrowserWindow({width: 300, height: 495,resizable: false, icon: __dirname + '/ressources/logo.ico'})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
+  var configPath=app.getPath("userData")
+  mainWindow.path = configPath;
   mainWindow.on('closed', function () {
   mainWindow = null
   })
