@@ -12,7 +12,7 @@ var dataLoaded=false
 var configPath=remote.getCurrentWindow().path+"/data.json"
 var store=""
 var save=true;
-var convert=false;
+var convert='off';
 var email=""
 var password=""
 
@@ -124,7 +124,8 @@ function process(){
                                 index+=1;
                                 document.getElementById("advance").innerHTML=index+"/"+numSong
                                 document.querySelector('#p1').MaterialProgress.setProgress(100*index/numSong);
-                                if(convert == true){
+                                console.log(convert)
+                                if(convert == 'on'){
                                     convertWav("/tmp/"+name+".mp3",path+"/"+name+".wav",callback);
                                 }else{
                                     var source=fs.createReadStream("/tmp/"+name+".mp3")
@@ -148,12 +149,17 @@ function process(){
                                 }
                             });
                         });
+                        request.end();
+                        request.on('error', function(err){
+                            console.log("Error: ", err);
+                            callback();
+                        }); 
                     });
                 }else{
                     index+=1;
                     document.getElementById("advance").innerHTML=index+"/"+numSong
                     document.querySelector('#p1').MaterialProgress.setProgress(100*index/numSong);
-                    if(convert == true && fs.existsSync(path+"/"+name+".mp3")){
+                    if(convert == 'on' && fs.existsSync(path+"/"+name+".mp3")){
                         convertWav(path+"/"+name+".mp3",path+"/"+name+".wav",callback);
                     }else{
                         callback();

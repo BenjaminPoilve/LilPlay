@@ -4,7 +4,8 @@
   "description": "Dumphone friendly google play music",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron ." ,
+    "packosx": "electron-packager ./ LilPlay--platform darwin --icon ./static/ressources/logo.icns"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -28,6 +29,6 @@
     "https": "^1.0.0",
     "jsonfile": "^2.4.0",
     "music-tag": "0.0.9",
-    "playmusic": "^2.2.0"
+    "playmusic": "^2.2.1"
   }
 }
