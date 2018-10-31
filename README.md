@@ -1,9 +1,9 @@
 
 
 ![ ](./static/ressources/logo.png)
-#Lilplay
+# Lilplay
 
-##Usage
+## Usage
 
 Lilplay is a little electron executable that connects to you google play account and downloads the favorite songs into a choosen folder.
 
@@ -13,7 +13,7 @@ It can remember the informations you gave him and convert to Wav (my phone does 
 ![ ](./static/ressources/screen.png)
 
 
-##Story
+## Story
 
 I love google play music. 
 
@@ -45,7 +45,7 @@ So once again I was without a proper listening device. Well my replacement dumbp
 
 I decided to change that! 
 
-###Disclaimer:
+### Disclaimer:
 
 The goal of this project is not to mess with google in any way. I gladly pay 10$ a month for a great service, and it turned out it did not cover all of my use cases. Since I knew how to fix that, I did, and shared my code. 
 
@@ -54,7 +54,7 @@ If your intention is to modify this to make massive downloads on google play, I 
 The fight on music is over, and everybody realised that a good enough service was all that was needed to have people stop pirating. This project goal is to make this service even better, not to advocate breach of TOS. 
 
 
-##FAQ/TroubleShooting
+## FAQ/TroubleShooting
 
 * Talk about [app password](https://support.google.com/accounts/answer/185833?hl=fr) for 2FA users
 * Need to have used google play on the machine before
